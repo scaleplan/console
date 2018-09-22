@@ -1,11 +1,11 @@
 <?php
 
-namespace Skaleplan\Console\Exceptions;
+namespace Scaleplan\Console\Exceptions;
 
 /**
  * Class CommandClassNotFoundException
  *
- * @package Skaleplan\Console\Exceptions
+ * @package Scaleplan\Console\Exceptions
  */
 class CommandClassNotFoundException extends AbstractException
 {

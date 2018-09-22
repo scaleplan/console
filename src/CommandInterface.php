@@ -1,11 +1,11 @@
 <?php
 
-namespace Skaleplan\Console;
+namespace Scaleplan\Console;
 
 /**
  * Interface CommandInterface
  *
- * @package Skaleplan\Console
+ * @package Scaleplan\Console
  */
 interface CommandInterface
 {

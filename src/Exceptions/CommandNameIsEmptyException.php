@@ -1,11 +1,11 @@
 <?php
 
-namespace Skaleplan\Console\Exceptions;
+namespace Scaleplan\Console\Exceptions;
 
 /**
  * Class CommandNameIsEmptyException
  *
- * @package Skaleplan\Console\Exceptions
+ * @package Scaleplan\Console\Exceptions
  */
 class CommandNameIsEmptyException extends AbstractException
 {

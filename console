@@ -5,9 +5,8 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 //require_once $_SERVER['DOCUMENT_ROOT'] . 'vendor/scaleplan/console/src/CommandFabric.php';
 
 try {
-    $test = GuzzleHttp\Psr7\Uri::HTTP_DEFAULT_HOST;
-    $command = Skaleplan\Console\CommandFabric::COMMAND_CLASS_POSTFIX;
+    $command = Scaleplan\Console\CommandFabric::COMMAND_CLASS_POSTFIX;
     //$command->run();
-} catch (Skaleplan\Console\Exceptions\AbstractException $e) {
+} catch (Scaleplan\Console\Exceptions\AbstractException $e) {
     echo $e->getMessage();
 }

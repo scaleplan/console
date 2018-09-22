@@ -1,11 +1,11 @@
 <?php
 
-namespace Skaleplan\Console;
+namespace Scaleplan\Console;
 
 /**
  * Class AbstractCommand
  *
- * @package Skaleplan\Console
+ * @package Scaleplan\Console
  */
 abstract class AbstractCommand implements CommandInterface
 {

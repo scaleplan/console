@@ -1,11 +1,11 @@
 <?php
 
-namespace Skaleplan\Console\Exceptions;
+namespace Scaleplan\Console\Exceptions;
 
 /**
  * Class AbstractException
  *
- * @package Skaleplan\Console\Exceptions
+ * @package Scaleplan\Console\Exceptions
  */
 class AbstractException extends \Exception
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace Skaleplan\Console;
+namespace Scaleplan\Console;
 
-use Skaleplan\Console\Exceptions\CommandClassNotFoundException;
-use Skaleplan\Console\Exceptions\CommandClassNotInstantiableException;
-use Skaleplan\Console\Exceptions\CommandClassNotImplementsCommandInterfaceException;
-use Skaleplan\Console\Exceptions\CommandNameIsEmptyException;
+use Scaleplan\Console\Exceptions\CommandClassNotFoundException;
+use Scaleplan\Console\Exceptions\CommandClassNotInstantiableException;
+use Scaleplan\Console\Exceptions\CommandClassNotImplementsCommandInterfaceException;
+use Scaleplan\Console\Exceptions\CommandNameIsEmptyException;
 
 /**
  * Class CommandFabric
  *
- * @package Skaleplan\Console
+ * @package Scaleplan\Console
  */
 class CommandFabric
 {
@@ -20,11 +20,11 @@ class CommandFabric
     /**
      * @param array $argv
      *
-     * @return \Skaleplan\Console\CommandInterface
-     * @throws \Skaleplan\Console\Exceptions\CommandClassNotFoundException
-     * @throws \Skaleplan\Console\Exceptions\CommandClassNotImplementsCommandInterfaceException
-     * @throws \Skaleplan\Console\Exceptions\CommandClassNotInstantiableException
-     * @throws \Skaleplan\Console\Exceptions\CommandNameIsEmptyException
+     * @return \Scaleplan\Console\CommandInterface
+     * @throws \Scaleplan\Console\Exceptions\CommandClassNotFoundException
+     * @throws \Scaleplan\Console\Exceptions\CommandClassNotImplementsCommandInterfaceException
+     * @throws \Scaleplan\Console\Exceptions\CommandClassNotInstantiableException
+     * @throws \Scaleplan\Console\Exceptions\CommandNameIsEmptyException
      */
     public static function getCommand(array $argv): CommandInterface
     {
@@ -49,7 +49,7 @@ class CommandFabric
             throw new CommandClassNotInstantiableException();
         }
 
-        /** @var \Skaleplan\Console\CommandInterface $command */
+        /** @var \Scaleplan\Console\CommandInterface $command */
         $command = $refClass->newInstance();
         $command->setArguments($arguments);
 
