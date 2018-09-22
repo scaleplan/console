@@ -50,7 +50,7 @@ abstract class AbstractCommand implements CommandInterface
      * @param string $name
      *
      * @return mixed
-     * 
+     *
      * @throws \Scaleplan\Console\Exceptions\CommandArgumentNotDefined
      */
     public function getArgument(string $name)
@@ -63,7 +63,7 @@ abstract class AbstractCommand implements CommandInterface
     }
 
     /**
-     * Command handler
+     * @throws \Scaleplan\Console\Exceptions\CommandArgumentNotDefined
      */
     public function run() : void
     {
