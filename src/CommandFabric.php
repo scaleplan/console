@@ -14,7 +14,7 @@ use Scaleplan\Console\Exceptions\CommandNameIsEmptyException;
  */
 class CommandFabric
 {
-    public const COMMANDS_NAMESPACE = 'App\\Commands\\';
+    public const COMMANDS_NAMESPACE = '\\App\\Commands\\';
     public const COMMAND_CLASS_POSTFIX = 'Command';
 
     /**
@@ -28,13 +28,16 @@ class CommandFabric
      */
     public static function getCommand(array $argv): CommandInterface
     {
-        if (!$commandName = \array_shift($argv)) {
+        if (!($commandName = $argv[1] ?? null)) {
             throw new CommandNameIsEmptyException();
         }
 
-        $arguments = $argv;
+        unset($argv[0], $argv[1]);
 
-        $className = self::COMMANDS_NAMESPACE . str_replace(':', '\\', $commandName) . self::COMMAND_CLASS_POSTFIX;
+        $path = array_map(function (string $item) {
+            return ucfirst($item);
+        }, explode(':', $commandName));
+        $className = self::COMMANDS_NAMESPACE . implode('\\', $path) . self::COMMAND_CLASS_POSTFIX;
         if (!\in_array(CommandInterface::class, class_implements($className), true)) {
             throw new CommandClassNotImplementsCommandInterfaceException();
         }
@@ -51,7 +54,7 @@ class CommandFabric
 
         /** @var \Scaleplan\Console\CommandInterface $command */
         $command = $refClass->newInstance();
-        $command->setArguments($arguments);
+        $command->setArguments($argv);
 
         return $command;
     }

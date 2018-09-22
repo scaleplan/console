@@ -1,6 +1,7 @@
 <?php
 
 namespace Scaleplan\Console;
+use Scaleplan\Console\Exceptions\CommandArgumentNotDefined;
 
 /**
  * Class AbstractCommand
@@ -22,21 +23,43 @@ abstract class AbstractCommand implements CommandInterface
     protected $arguments;
 
     /**
+     * @return array
+     */
+    protected static function getArgumentsNames()
+    {
+        $argsNames = \array_values(\array_slice(explode(' ', self::SIGNATURE), 1));
+        return \array_flip($argsNames) ?? [];
+    }
+
+    /**
      * @param array $arguments
      */
     public function setArguments(array $arguments) : void
     {
-        $this->arguments = $arguments;
+        $arguments = array_values($arguments);
+        $argsNames = self::getArgumentsNames();
+        
+        array_walk($argsNames, function (&$value, $key) use ($arguments) {
+            $value = $arguments[$value] ?? self::DEFAULTS[$key] ?? null;
+        });
+
+        $this->arguments = $argsNames;
     }
 
     /**
      * @param string $name
      *
-     * @return mixed|null
+     * @return mixed
+     * 
+     * @throws \Scaleplan\Console\Exceptions\CommandArgumentNotDefined
      */
     public function getArgument(string $name)
     {
-        return $this->arguments[$name] ?? self::DEFAULTS[$name] ?? null;
+        if (!isset($this->arguments[$name])) {
+            throw new CommandArgumentNotDefined();
+        }
+
+        return $this->arguments[$name];
     }
 
     /**

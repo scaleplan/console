@@ -9,5 +9,5 @@ namespace Scaleplan\Console\Exceptions;
  */
 class CommandClassNotFoundException extends AbstractException
 {
-    public const MASSAGE = 'Command class not found.';
+    public const MESSAGE = 'Command class not found.';
 }
