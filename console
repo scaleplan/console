@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+
+try {
+    $command = \Skaleplan\Console\CommandFabric::getCommand($argv);
+    $command->run();
+} catch (\Skaleplan\Console\Exceptions\AbstractException $e) {
+    echo $e->getMessage();
+}

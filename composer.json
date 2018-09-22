@@ -12,5 +12,6 @@
     },
     "require": {
         "php": ">=7.0"
-    }
+    },
+    "bin":["codecept"]
 }
