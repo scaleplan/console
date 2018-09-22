@@ -1,17 +1,12 @@
 {
     "name": "scaleplan/console",
     "description": "Scaleplan console component",
-    "minimum-stability": "dev",
-    "config": {
-        "process-timeout": 1800
-    },
     "autoload": {
         "psr-4": {
-            "Scaleplan\\Console\\": "src"
+            "Scaleplan\\Console\\": "src/"
         }
     },
     "require": {
         "php": ">=7.0"
-    },
-    "bin":["console"]
+    }
 }

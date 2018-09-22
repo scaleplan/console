@@ -10,11 +10,11 @@ use Skaleplan\Console\Exceptions\CommandNameIsEmptyException;
 /**
  * Class CommandFabric
  *
- * @package App\classes\console
+ * @package Skaleplan\Console
  */
 class CommandFabric
 {
-    public const COMMANDS_NAMESPACE = 'App\Commands\\';
+    public const COMMANDS_NAMESPACE = 'App\\Commands\\';
     public const COMMAND_CLASS_POSTFIX = 'Command';
 
     /**
