@@ -3,7 +3,7 @@
 namespace Scaleplan\Console\Exceptions;
 
 /**
- * Class AbstractException
+ * Class KafkaException
  *
  * @package Scaleplan\Console\Exceptions
  */
@@ -12,7 +12,7 @@ class AbstractException extends \Exception
     public const MESSAGE = 'Command execution error.';
 
     /**
-     * AbstractException constructor.
+     * KafkaException constructor.
      *
      * @param int $code
      * @param \Throwable|null $previous
