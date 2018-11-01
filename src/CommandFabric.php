@@ -18,26 +18,24 @@ class CommandFabric
     public const COMMAND_CLASS_POSTFIX = 'Command';
 
     /**
-     * @param array $argv
+     * @param string $commandName
+     * @param array $args
      *
-     * @return \Scaleplan\Console\CommandInterface
-     * @throws \Scaleplan\Console\Exceptions\CommandClassNotFoundException
-     * @throws \Scaleplan\Console\Exceptions\CommandClassNotImplementsCommandInterfaceException
-     * @throws \Scaleplan\Console\Exceptions\CommandClassNotInstantiableException
-     * @throws \Scaleplan\Console\Exceptions\CommandNameIsEmptyException
+     * @return CommandInterface
+     * 
+     * @throws CommandClassNotFoundException
+     * @throws CommandClassNotImplementsCommandInterfaceException
+     * @throws CommandClassNotInstantiableException
      */
-    public static function getCommand(array $argv): CommandInterface
+    public static function getCommand(string $commandName, array $args): CommandInterface
     {
-        if (!($commandName = $argv[1] ?? null)) {
-            throw new CommandNameIsEmptyException();
-        }
-
-        unset($argv[0], $argv[1]);
-
         $path = array_map(function (string $item) {
             return ucfirst($item);
         }, explode(':', $commandName));
-        $className = self::COMMANDS_NAMESPACE . implode('\\', $path) . self::COMMAND_CLASS_POSTFIX;
+        $className = getenv('COMMANDS_NAMESPACE') ?? self::COMMANDS_NAMESPACE
+            . implode('\\', $path)
+            . getenv('COMMAND_CLASS_POSTFIX') ?? self::COMMAND_CLASS_POSTFIX;
+
         if (!\in_array(CommandInterface::class, class_implements($className), true)) {
             throw new CommandClassNotImplementsCommandInterfaceException();
         }
@@ -54,7 +52,7 @@ class CommandFabric
 
         /** @var \Scaleplan\Console\CommandInterface $command */
         $command = $refClass->newInstance();
-        $command->setArguments($argv);
+        $command->setArguments($args);
 
         return $command;
     }

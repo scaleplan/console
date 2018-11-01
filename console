@@ -1,10 +1,19 @@
 #!/usr/bin/env php
 <?php
 
+use Scaleplan\Console\CommandFabric;
+use Scaleplan\Console\Exceptions\CommandNameIsEmptyException;
+
 require_once $_SERVER['DOCUMENT_ROOT'] . 'vendor/autoload.php';
 
 try {
-    $command = Scaleplan\Console\CommandFabric::getCommand($argv);
+    if (!($commandName = $argv[1] ?? null)) {
+        throw new CommandNameIsEmptyException();
+    }
+
+    unset($argv[0], $argv[1]);
+
+    $command = CommandFabric::getCommand($commandName, array_values($argv));
     $command->run();
 } catch (Scaleplan\Console\Exceptions\AbstractException $e) {
     echo $e->getMessage();
