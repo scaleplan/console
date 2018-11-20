@@ -7,7 +7,7 @@ namespace Scaleplan\Console\Exceptions;
  *
  * @package Scaleplan\Console\Exceptions
  */
-class CommandArgumentNotDefined extends AbstractException
+class CommandArgumentNotDefined extends CommandException
 {
     public const MESSAGE = 'Command argument not defined.';
 }

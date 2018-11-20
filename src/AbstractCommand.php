@@ -1,7 +1,9 @@
 <?php
 
 namespace Scaleplan\Console;
+
 use Scaleplan\Console\Exceptions\CommandArgumentNotDefined;
+use Scaleplan\Console\Exceptions\CommandSignatureIsEmptyException;
 
 /**
  * Class AbstractCommand
@@ -10,12 +12,12 @@ use Scaleplan\Console\Exceptions\CommandArgumentNotDefined;
  */
 abstract class AbstractCommand implements CommandInterface
 {
-    public const SIGNATURE = 'sum x y';
+    public const SIGNATURE = '';
 
-    public const DEFAULTS = [
-        'x' => 1,
-        'y' => 2,
-    ];
+    /**
+     * @var array
+     */
+    public static $defaults = [];
 
     /**
      * @var array
@@ -23,12 +25,24 @@ abstract class AbstractCommand implements CommandInterface
     protected $arguments;
 
     /**
+     * AbstractCommand constructor.
+     * 
+     * @throws CommandSignatureIsEmptyException
+     */
+    public function __construct()
+    {
+        if (gettype(static::SIGNATURE) !== 'string' || !static::SIGNATURE) {
+            throw new CommandSignatureIsEmptyException();
+        }
+    }
+
+    /**
      * @return array
      */
     protected static function getArgumentsNames()
     {
-        $argsNames = \array_values(\array_slice(explode(' ', self::SIGNATURE), 1));
-        return \array_flip($argsNames) ?? [];
+        $argsNames = \array_values(\array_slice(explode(' ', static::SIGNATURE), 1));
+        return $argsNames ?? [];
     }
 
     /**
@@ -36,11 +50,11 @@ abstract class AbstractCommand implements CommandInterface
      */
     public function setArguments(array $arguments) : void
     {
+        $argsNames = \array_flip(static::getArgumentsNames());
         $arguments = array_values($arguments);
-        $argsNames = self::getArgumentsNames();
         
-        array_walk($argsNames, function (&$value, $key) use ($arguments) {
-            $value = $arguments[$value] ?? self::DEFAULTS[$key] ?? null;
+        array_walk($argsNames, function (&$value, $argName) use ($arguments) {
+            $value = $arguments[$value] ?? static::DEFAULTS[$key] ?? null;
         });
 
         $this->arguments = $argsNames;
@@ -65,8 +79,5 @@ abstract class AbstractCommand implements CommandInterface
     /**
      * @throws \Scaleplan\Console\Exceptions\CommandArgumentNotDefined
      */
-    public function run() : void
-    {
-        echo $this->getArgument('x') * $this->getArgument('y');
-    }
+    abstract public function run() : void;
 }

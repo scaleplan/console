@@ -7,7 +7,7 @@ namespace Scaleplan\Console\Exceptions;
  *
  * @package Scaleplan\Console\Exceptions
  */
-class CommandClassNotFoundException extends AbstractException
+class CommandClassNotFoundException extends CommandException
 {
     public const MESSAGE = 'Command class not found.';
 }

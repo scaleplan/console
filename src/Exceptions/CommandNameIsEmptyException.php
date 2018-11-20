@@ -7,7 +7,7 @@ namespace Scaleplan\Console\Exceptions;
  *
  * @package Scaleplan\Console\Exceptions
  */
-class CommandNameIsEmptyException extends AbstractException
+class CommandNameIsEmptyException extends CommandException
 {
     public const MESSAGE = 'Command name is empty.';
 }

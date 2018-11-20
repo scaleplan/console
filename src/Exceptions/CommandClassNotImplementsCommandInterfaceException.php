@@ -7,7 +7,7 @@ namespace Scaleplan\Console\Exceptions;
  *
  * @package Scaleplan\Console\Exceptions
  */
-class CommandClassNotImplementsCommandInterfaceException extends AbstractException
+class CommandClassNotImplementsCommandInterfaceException extends CommandException
 {
     public const MESSAGE = 'Command class not implements command interface.';
 }

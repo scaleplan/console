@@ -7,7 +7,7 @@ namespace Scaleplan\Console\Exceptions;
  *
  * @package Scaleplan\Console\Exceptions
  */
-class CommandClassNotInstantiableException extends AbstractException
+class CommandClassNotInstantiableException extends CommandException
 {
     public const MESSAGE = 'Command class not instantiable exception.';
 }

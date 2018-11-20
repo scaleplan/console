@@ -9,6 +9,8 @@ namespace Scaleplan\Console;
  */
 interface CommandInterface
 {
+    public const SIGNATURE = '';
+
     /**
      * @param array $args
      */
