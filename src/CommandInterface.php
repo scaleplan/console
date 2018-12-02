@@ -11,6 +11,8 @@ interface CommandInterface
 {
     public const SIGNATURE = '';
 
+    public const DAEMON_TIMEOUT = 10000;
+
     /**
      * @param array $args
      */
