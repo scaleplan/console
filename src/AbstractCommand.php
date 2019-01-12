@@ -14,10 +14,7 @@ abstract class AbstractCommand implements CommandInterface
 {
     public const SIGNATURE = '';
 
-    /**
-     * @var array
-     */
-    public static $defaults = [];
+    public const DEFAULTS = [];
 
     /**
      * @var array
@@ -54,7 +51,7 @@ abstract class AbstractCommand implements CommandInterface
         $arguments = array_values($arguments);
         
         array_walk($argsNames, function (&$value, $argName) use ($arguments) {
-            $value = $arguments[$value] ?? static::DEFAULTS[$key] ?? null;
+            $value = $arguments[$value] ?? static::DEFAULTS[$argName] ?? null;
         });
 
         $this->arguments = $argsNames;

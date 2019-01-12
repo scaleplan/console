@@ -8,7 +8,9 @@
     },
     "require": {
         "php": ">=7.0",
-        "scaleplan/helpers": "dev-master"
+        "scaleplan/helpers": "dev-master",
+        "scaleplan/get-instance": "dev-master",
+        "jakub-onderka/php-console-color": "dev-master"
     },
     "bin":["console"]
 }
