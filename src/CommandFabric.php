@@ -7,7 +7,7 @@ use Scaleplan\Console\Exceptions\CommandClassNotInstantiableException;
 use Scaleplan\Console\Exceptions\CommandClassNotImplementsCommandInterfaceException;
 use Scaleplan\Console\Exceptions\CommandException;
 use Scaleplan\Console\Exceptions\InvalidCommandSignatureException;
-use function Scaleplan\Helpers\getenv;
+use function Scaleplan\Helpers\get_env;
 
 /**
  * Class CommandFabric
@@ -36,9 +36,10 @@ class CommandFabric
         $path = array_map(function (string $item) {
             return ucfirst($item);
         }, explode(':', $commandName));
-        $className = getenv('COMMANDS_NAMESPACE') ?? static::COMMANDS_NAMESPACE
+        /** @var CommandInterface $className */
+        $className = get_env('COMMANDS_NAMESPACE') ?? static::COMMANDS_NAMESPACE
             . implode('\\', $path)
-            . getenv('COMMAND_CLASS_POSTFIX') ?? static::COMMAND_CLASS_POSTFIX;
+            . get_env('COMMAND_CLASS_POSTFIX') ?? static::COMMAND_CLASS_POSTFIX;
 
         if (!class_exists($className)) {
             throw new CommandClassNotFoundException();

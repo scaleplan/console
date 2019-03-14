@@ -28,7 +28,7 @@ abstract class AbstractCommand implements CommandInterface
      */
     public function __construct()
     {
-        if (gettype(static::SIGNATURE) !== 'string' || !static::SIGNATURE) {
+        if (!static::SIGNATURE && !is_string(static::SIGNATURE)) {
             throw new CommandSignatureIsEmptyException();
         }
     }
@@ -36,9 +36,9 @@ abstract class AbstractCommand implements CommandInterface
     /**
      * @return array
      */
-    protected static function getArgumentsNames()
+    protected static function getArgumentsNames() : array
     {
-        $argsNames = \array_values(\array_slice(explode(' ', static::SIGNATURE), 1));
+        $argsNames = \array_values(\array_slice(array_map('trim', explode(' ', static::SIGNATURE)), 1));
         return $argsNames ?? [];
     }
 
