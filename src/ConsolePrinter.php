@@ -43,7 +43,7 @@ class ConsolePrinter
      *
      * @throws \JakubOnderka\PhpConsoleColor\InvalidStyleException
      */
-    public function print(\string $message, \string $type = null) : void
+    public function print(string $message, string $type = null) : void
     {
         if (\in_array($type, static::ALLOW_TYPES, true)) {
                 $message = $this->printer->apply('color_' . $type, $message);
