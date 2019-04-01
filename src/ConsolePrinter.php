@@ -82,27 +82,3 @@ class ConsolePrinter
         $this->print($message, static::INFO_TYPE);
     }
 }
-
-/**
- * @param $message
- */
-function print_ok($message)
-{
-    ConsolePrinter::getInstance()->printOk($message);
-}
-
-/**
- * @param $message
- */
-function print_error($message)
-{
-    ConsolePrinter::getInstance()->printError($message);
-}
-
-/**
- * @param $message
- */
-function print_info($message)
-{
-    ConsolePrinter::getInstance()->print_info($message);
-}

@@ -2,6 +2,9 @@
     "name": "scaleplan/console",
     "description": "Scaleplan console component",
     "autoload": {
+        "files": [
+            "src/functions.php"
+        ],
         "psr-4": {
             "Scaleplan\\Console\\": "src/"
         }
