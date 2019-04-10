@@ -12,7 +12,9 @@ use Scaleplan\Console\Exceptions\CommandSignatureIsEmptyException;
  */
 abstract class AbstractCommand implements CommandInterface
 {
-    public const SIGNATURE = '';
+    public const SIGNATURE = null;
+
+    public const DAEMON_TIMEOUT = 10000;
 
     public const DEFAULTS = [];
 
@@ -62,7 +64,7 @@ abstract class AbstractCommand implements CommandInterface
      *
      * @return mixed
      *
-     * @throws \Scaleplan\Console\Exceptions\CommandArgumentNotDefined
+     * @throws CommandArgumentNotDefined
      */
     public function getArgument(string $name)
     {
@@ -74,7 +76,7 @@ abstract class AbstractCommand implements CommandInterface
     }
 
     /**
-     * @throws \Scaleplan\Console\Exceptions\CommandArgumentNotDefined
+     * @throws CommandArgumentNotDefined
      */
     abstract public function run() : void;
 }

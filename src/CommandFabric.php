@@ -8,6 +8,7 @@ use Scaleplan\Console\Exceptions\CommandClassNotImplementsCommandInterfaceExcept
 use Scaleplan\Console\Exceptions\CommandException;
 use Scaleplan\Console\Exceptions\InvalidCommandSignatureException;
 use function Scaleplan\Helpers\get_env;
+use Scaleplan\Helpers\NameConverter;
 
 /**
  * Class CommandFabric
@@ -16,7 +17,7 @@ use function Scaleplan\Helpers\get_env;
  */
 class CommandFabric
 {
-    public const COMMANDS_NAMESPACE    = '\\App\\Commands\\';
+    public const COMMANDS_NAMESPACE    = 'App\\Commands\\';
     public const COMMAND_CLASS_POSTFIX = 'Command';
 
     /**
@@ -33,13 +34,11 @@ class CommandFabric
      */
     public static function getCommand(string $commandName, array $args) : CommandInterface
     {
-        $path = array_map(function (string $item) {
-            return ucfirst($item);
-        }, explode(':', $commandName));
+        $path = explode(':', NameConverter::kebabCaseToCamelCase($commandName));
         /** @var CommandInterface $className */
-        $className = get_env('COMMANDS_NAMESPACE') ?? static::COMMANDS_NAMESPACE
+        $className = (get_env('COMMANDS_NAMESPACE') ?? static::COMMANDS_NAMESPACE)
             . implode('\\', $path)
-            . get_env('COMMAND_CLASS_POSTFIX') ?? static::COMMAND_CLASS_POSTFIX;
+            . (get_env('COMMAND_CLASS_POSTFIX') ?? static::COMMAND_CLASS_POSTFIX);
 
         if (!class_exists($className)) {
             throw new CommandClassNotFoundException();
@@ -49,7 +48,7 @@ class CommandFabric
             throw new CommandClassNotImplementsCommandInterfaceException();
         }
 
-        if (!$className::SIGNATURE) {
+        if (empty($className::SIGNATURE)) {
             throw new InvalidCommandSignatureException();
         }
 
@@ -59,7 +58,7 @@ class CommandFabric
                 throw new CommandClassNotInstantiableException();
             }
 
-            /** @var \Scaleplan\Console\CommandInterface $command */
+            /** @var CommandInterface $command */
             $command = $refClass->newInstance();
             $command->setArguments($args);
         } catch (\ReflectionException $e) {

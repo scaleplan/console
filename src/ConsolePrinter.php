@@ -14,14 +14,14 @@ class ConsolePrinter
 {
     use GetInstanceTrait;
 
-    public const OK_TYPE = 40;
-    public const ERROR_TYPE = 160;
-    public const INFO_TYPE = 226;
+    public const OK_TYPE    = 'green';
+    public const ERROR_TYPE = 'red';
+    public const INFO_TYPE  = 'blue';
 
     public const ALLOW_TYPES = [
         self::OK_TYPE,
         self::ERROR_TYPE,
-        self::INFO_TYPE
+        self::INFO_TYPE,
     ];
 
     /**
@@ -46,10 +46,10 @@ class ConsolePrinter
     public function print(string $message, string $type = null) : void
     {
         if (\in_array($type, static::ALLOW_TYPES, true)) {
-                $message = $this->printer->apply('color_' . $type, $message);
+            $message = $this->printer->apply($type, $message);
         }
 
-        echo $message . '\n';
+        echo $message . PHP_EOL;
     }
 
     /**
