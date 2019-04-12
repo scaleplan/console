@@ -52,7 +52,7 @@ abstract class AbstractCommand implements CommandInterface
         $argsNames = \array_flip(static::getArgumentsNames());
         $arguments = array_values($arguments);
         
-        array_walk($argsNames, function (&$value, $argName) use ($arguments) {
+        array_walk($argsNames, static function (&$value, $argName) use ($arguments) {
             $value = $arguments[$value] ?? static::DEFAULTS[$argName] ?? null;
         });
 
