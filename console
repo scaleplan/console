@@ -6,6 +6,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 use Scaleplan\Console\CommandFabric;
 use Scaleplan\Console\Exceptions\CommandNameIsEmptyException;
 
+$dotEnv = Dotenv\Dotenv::create(__DIR__);
+$dotEnv->load();
+
 try {
     if (!($commandName = $argv[1] ?? null)) {
         throw new CommandNameIsEmptyException();
