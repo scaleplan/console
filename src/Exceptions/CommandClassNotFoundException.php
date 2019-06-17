@@ -10,4 +10,5 @@ namespace Scaleplan\Console\Exceptions;
 class CommandClassNotFoundException extends CommandException
 {
     public const MESSAGE = 'Command class not found.';
+    public const CODE = 404;
 }

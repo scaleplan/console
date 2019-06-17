@@ -10,4 +10,5 @@ namespace Scaleplan\Console\Exceptions;
 class CommandClassNotInstantiableException extends CommandException
 {
     public const MESSAGE = 'Command class not instantiable exception.';
+    public const CODE = 406;
 }
