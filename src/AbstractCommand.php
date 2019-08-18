@@ -14,8 +14,6 @@ abstract class AbstractCommand implements CommandInterface
 {
     public const SIGNATURE = null;
 
-    public const DAEMON_TIMEOUT = 10000;
-
     public const DEFAULTS = [];
 
     /**
@@ -25,7 +23,7 @@ abstract class AbstractCommand implements CommandInterface
 
     /**
      * AbstractCommand constructor.
-     * 
+     *
      * @throws CommandSignatureIsEmptyException
      */
     public function __construct()
@@ -51,7 +49,7 @@ abstract class AbstractCommand implements CommandInterface
     {
         $argsNames = \array_flip(static::getArgumentsNames());
         $arguments = array_values($arguments);
-        
+
         array_walk($argsNames, static function (&$value, $argName) use ($arguments) {
             $value = $arguments[$value] ?? static::DEFAULTS[$argName] ?? null;
         });

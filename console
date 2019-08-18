@@ -18,6 +18,6 @@ try {
 
     $command = CommandFabric::getCommand($commandName, array_values($argv));
     $command->run();
-} catch (Scaleplan\Console\Exceptions\AbstractException $e) {
+} catch (\Scaleplan\Console\Exceptions\CommandException $e) {
     echo $e->getMessage();
 }

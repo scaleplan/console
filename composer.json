@@ -14,6 +14,10 @@
         "scaleplan/helpers": "dev-master",
         "scaleplan/get-instance": "dev-master",
         "jakub-onderka/php-console-color": "*"
+    }
+    ,
+    "require-dev": {
+        "roave/security-advisories": "dev-master"
     },
     "bin":["console"]
 }
