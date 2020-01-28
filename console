@@ -6,8 +6,7 @@ require_once __DIR__ . '/../../autoload.php';
 use Scaleplan\Console\CommandFabric;
 use Scaleplan\Console\Exceptions\CommandNameIsEmptyException;
 
-$dotEnv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotEnv->load();
+(new \Ahc\Env\Loader)->load(__DIR__ . (empty($_COOKIE['phpbrowser']) ? '/.env' : '/.env.test'));
 
 try {
     if (!($commandName = $argv[1] ?? null)) {
