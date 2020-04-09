@@ -3,10 +3,15 @@
 
 require_once __DIR__ . '/../../autoload.php';
 
+use Ahc\Env\Loader;
 use Scaleplan\Console\CommandFabric;
 use Scaleplan\Console\Exceptions\CommandNameIsEmptyException;
+use Scaleplan\DependencyInjection\DependencyInjection;
+use function Scaleplan\Helpers\get_required_env;
 
-(new \Ahc\Env\Loader)->load(__DIR__ . (empty($_COOKIE['phpbrowser']) ? '/.env' : '/.env.test'));
+$rootDir = __DIR__ . '/../';
+(new Loader)->load($rootDir . (empty($_COOKIE['phpbrowser']) ? '/.env' : '/.env.test'));
+DependencyInjection::loadContainersFromDir($rootDir . get_required_env('CONTAINERS_CONFIGS_PATH'));
 
 try {
     if (!($commandName = $argv[1] ?? null)) {
@@ -17,6 +22,6 @@ try {
 
     $command = CommandFabric::getCommand($commandName, array_values($argv));
     $command->run();
-} catch (\Scaleplan\Console\Exceptions\CommandException $e) {
+} catch (Throwable $e) {
     echo $e->getMessage();
 }
