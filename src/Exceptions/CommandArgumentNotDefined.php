@@ -9,6 +9,6 @@ namespace Scaleplan\Console\Exceptions;
  */
 class CommandArgumentNotDefined extends CommandException
 {
-    public const MESSAGE = 'Command argument not defined.';
+    public const MESSAGE = 'Не задан аргумент команды.';
     public const CODE = 404;
 }

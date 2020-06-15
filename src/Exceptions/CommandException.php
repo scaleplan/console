@@ -9,7 +9,7 @@ namespace Scaleplan\Console\Exceptions;
  */
 class CommandException extends \Exception
 {
-    public const MESSAGE = 'Command execution error.';
+    public const MESSAGE = 'Ошибка выполнения команды.';
     public const CODE = 400;
 
     /**

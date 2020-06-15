@@ -9,6 +9,6 @@ namespace Scaleplan\Console\Exceptions;
  */
 class CommandClassNotImplementsCommandInterfaceException extends CommandException
 {
-    public const MESSAGE = 'Command class not implements command interface.';
+    public const MESSAGE = 'Класс команды не реализизует интерфейс команд.';
     public const CODE = 406;
 }
