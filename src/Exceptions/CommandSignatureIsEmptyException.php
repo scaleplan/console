@@ -9,5 +9,5 @@ namespace Scaleplan\Console\Exceptions;
  */
 class CommandSignatureIsEmptyException extends CommandException
 {
-    public const MESSAGE = 'Пустая сигнатура команды.';
+    public const MESSAGE = 'console.empty-signature';
 }

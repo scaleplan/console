@@ -9,6 +9,6 @@ namespace Scaleplan\Console\Exceptions;
  */
 class InvalidCommandSignatureException extends CommandException
 {
-    public const MESSAGE = 'Неверная сигнатура команды.';
+    public const MESSAGE = 'console.wrong-signature';
     public const CODE = 406;
 }

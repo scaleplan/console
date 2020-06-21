@@ -1,0 +1,8 @@
+arg-not-set: Command arguments not set.
+file-not-found: Command file not found.
+class-not-command: Command class must implements command interface.
+class-not-instantiable: Command class not instantiable.
+command-run-error: Command run error.
+empty-command-name: Empty command name.
+empty-signature: Empty command signature.
+wrong-signature: Wrong command signature.

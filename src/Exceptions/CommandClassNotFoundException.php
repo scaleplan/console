@@ -9,6 +9,6 @@ namespace Scaleplan\Console\Exceptions;
  */
 class CommandClassNotFoundException extends CommandException
 {
-    public const MESSAGE = 'Файл команды не найден.';
+    public const MESSAGE = 'console.file-not-found';
     public const CODE = 404;
 }

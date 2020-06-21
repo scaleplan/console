@@ -9,6 +9,6 @@ namespace Scaleplan\Console\Exceptions;
  */
 class CommandClassNotInstantiableException extends CommandException
 {
-    public const MESSAGE = 'Невозможно создать объект класса команды.';
+    public const MESSAGE = 'console.class-not-instantiable';
     public const CODE = 406;
 }

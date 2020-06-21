@@ -9,5 +9,5 @@ namespace Scaleplan\Console\Exceptions;
  */
 class CommandNameIsEmptyException extends CommandException
 {
-    public const MESSAGE = 'Пустое имя команды.';
+    public const MESSAGE = 'console.empty-command-name';
 }

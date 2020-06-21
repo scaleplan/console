@@ -1,0 +1,8 @@
+arg-not-set: Не задан аргумент команды.
+file-not-found: Файл команды не найден.
+class-not-command: Класс команды не реализизует интерфейс команд.
+class-not-instantiable: Невозможно создать объект класса команды.
+command-run-error: Ошибка выполнения команды.
+empty-command-name: Пустое имя команды.
+empty-signature: Пустая сигнатура команды.
+wrong-signature: Неверная сигнатура команды.
