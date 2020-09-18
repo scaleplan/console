@@ -20,18 +20,32 @@ abstract class AbstractCommand implements CommandInterface
     /**
      * @var array
      */
-    protected $arguments;
+    protected $arguments = [];
+
+    /**
+     * @var array
+     */
+    protected $flags = [];
 
     /**
      * AbstractCommand constructor.
      *
+     * @param array $arguments
+     *
      * @throws CommandSignatureIsEmptyException
+     * @throws \ReflectionException
+     * @throws \Scaleplan\DependencyInjection\Exceptions\ContainerTypeNotSupportingException
+     * @throws \Scaleplan\DependencyInjection\Exceptions\DependencyInjectionException
+     * @throws \Scaleplan\DependencyInjection\Exceptions\ParameterMustBeInterfaceNameOrClassNameException
+     * @throws \Scaleplan\DependencyInjection\Exceptions\ReturnTypeMustImplementsInterfaceException
      */
-    public function __construct()
+    public function __construct(array $arguments)
     {
         if (!static::SIGNATURE && !is_string(static::SIGNATURE)) {
             throw new CommandSignatureIsEmptyException();
         }
+
+        $this->setArguments($arguments);
     }
 
     /**
@@ -48,14 +62,19 @@ abstract class AbstractCommand implements CommandInterface
      */
     public function setArguments(array $arguments) : void
     {
-        $argsNames = \array_flip(static::getArgumentsNames());
-        $arguments = array_values($arguments);
+        $argsNames = static::getArgumentsNames();
 
-        array_walk($argsNames, static function (&$value, $argName) use ($arguments) {
-            $value = $arguments[$value] ?? static::DEFAULTS[$argName] ?? null;
-        });
+        foreach ($arguments as $argument) {
+            if ('-' === ((string)$argument)[0]) {
+                $this->flags[] = (string)$argument;
+                continue;
+            }
 
-        $this->arguments = $argsNames;
+            $this->arguments[current($argsNames)] = $argument;
+            next($argsNames);
+        }
+
+
     }
 
     /**
@@ -72,6 +91,16 @@ abstract class AbstractCommand implements CommandInterface
         }
 
         return $this->arguments[$name];
+    }
+
+    /**
+     * @param string $opt
+     *
+     * @return mixed
+     */
+    public function isFlagPresent(string $opt)
+    {
+        return in_array($opt, $this->flags, true);
     }
 
     /**

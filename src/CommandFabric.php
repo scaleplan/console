@@ -59,8 +59,7 @@ class CommandFabric
             }
 
             /** @var CommandInterface $command */
-            $command = $refClass->newInstance();
-            $command->setArguments($args);
+            $command = $refClass->newInstance($args);
         } catch (\ReflectionException $e) {
             throw new CommandException($e->getMessage());
         }
